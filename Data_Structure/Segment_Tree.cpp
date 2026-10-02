@@ -59,7 +59,28 @@ struct SegTree {
         } while ((r & -r) != r);
         return 0;
     }
-    
+
     ll n, base;
     vector<Node> seg;
+};
+
+struct SumNode {
+    ll x{ 0 };
+    SumNode() {}
+    SumNode(ll x) : x{ x } {}
+    static SumNode merge(const SumNode& L, const SumNode& R) { return SumNode(L.x + R.x); }
+};
+
+struct MinNode {
+    ll x{ LLONG_MAX }, i{ -1 };
+    MinNode() {}
+    MinNode(ll x, ll i) : x{ x }, i{ i } {}
+    static MinNode merge(const MinNode& L, const MinNode& R) { return R.x < L.x ? R : L; }
+};
+
+struct MaxNode {
+    ll x{ LLONG_MIN }, i{ -1 };
+    MaxNode() {}
+    MaxNode(ll x, ll i) : x{ x }, i{ i } {}
+    static MaxNode merge(const MaxNode& L, const MaxNode& R) { return R.x > L.x ? R : L; }
 };
